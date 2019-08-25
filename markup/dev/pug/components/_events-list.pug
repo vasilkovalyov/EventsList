@@ -1,0 +1,39 @@
+.events-list
+    .row
+        .col-4
+            .form-group
+                select.form-control.form-control-sm
+                    option Дата
+    .row
+        .col-4
+            .day-item
+                .day-header.text-center
+                    time(
+                        datetime='2019-05-22'
+                    ) 22.05.2019
+                ul.day-events-list
+                    li.event-item.d-flex.align-items-center.justify-content-between
+                        .event-text.d-flex.align-items-center
+                            label Custom 1
+                            input(
+                                type='text'
+                            )
+                        .event-panel-side.d-flex.align-items-center
+                            .event-date
+                                input(
+                                    type='text'
+                                ).datepicker
+                            .event-time.start.d-flex.align-items-center
+                                label.text-center 08:00
+                                input(
+                                    type='text'
+                                )
+                            .event-time.end.d-flex.align-items-center
+                                label.text-center 12:00
+                                input(
+                                    type='text'
+                                )
+                            .event-controls.d-flex.align-items-center
+                                span.icon-check
+                                span.icon-edit
+                                span.icon-close                

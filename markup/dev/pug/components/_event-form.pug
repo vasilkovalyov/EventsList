@@ -1,0 +1,27 @@
+.event-form
+    h4  Добавить мероприятние
+    form.row.flex-wrap
+        .input-item.col-6
+            label Название
+            input(
+                type='text'
+            ).input-text-event
+        .input-item.col-6
+            label Дата
+            input(
+                type='text'
+            ).input-date-event.datepicker
+        .input-item.col-6
+            label Время начала
+            input(
+                type='time'
+            ).input-start-event
+        .input-item.col-6
+            label Время конца
+            input(
+                type='time'
+            ).input-end-event
+        .input-item.col-12
+            button(
+                type='button'
+            ).btn-create-event.btn.btn-danger.text-uppercase  Добавить
