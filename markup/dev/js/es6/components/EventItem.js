@@ -1,5 +1,5 @@
-class EventItem{
-    constructor(textEvent, timeStartEvent, timeEndEvent, dateEvent){
+class EventItem {
+    constructor(textEvent, dateEvent, timeStartEvent, timeEndEvent) {
         this.textEvent = textEvent;
         this.timeStartEvent = timeStartEvent;
         this.timeEndEvent = timeEndEvent;
@@ -7,41 +7,42 @@ class EventItem{
         this.idEvent = 0;
     }
 
-    get TimeStartEvent(){
+    get TimeStartEvent() {
         return this.timeStartEvent;
     }
 
-    set TimeStartEvent(value){
+    set TimeStartEvent(value) {
         this.timeStartEvent = value;
     }
 
-    get TimeEndEvent(){
+    get TimeEndEvent() {
         return this.timeEndEvent;
     }
 
-    set TimeEndEvent(value){
+    set TimeEndEvent(value) {
         this.timeEndEvent = value;
     }
 
-    get DateEvent(){
+    get DateEvent() {
         return this.dateEvent;
     }
 
-    set DateEvent(value){
+    set DateEvent(value) {
         this.dateEvent = value;
     }
 
-    get IdEvent(){
+    get IdEvent() {
         return this.idEvent;
     }
 
-    set IdEvent(value){
+    set IdEvent(value) {
         this.idEvent = value;
     }
 
-    render(){
+    render() {
         const li = document.createElement('li');
-        li.className='event-item d-flex align-items-center justify-content-between';
+        li.className = 'event-item d-flex align-items-center justify-content-between';
+        li.setAttribute('id', this.idEvent);
 
         const eventContent = `
             <div class="event-text d-flex align-items-center">
@@ -73,4 +74,4 @@ class EventItem{
     }
 }
 
-export {EventItem}
+export { EventItem }
