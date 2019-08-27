@@ -1,6 +1,6 @@
 import { getInputs } from '../moduleFunctions/Functions'
 
-export function valid() {
+export function validation() {
     getInputs().forEach((item) => {
         if (isEmptyField(item.value)) {
             item.classList.add('input-error');

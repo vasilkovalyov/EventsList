@@ -29,3 +29,20 @@ export function clearAllInputField(array) {
         item.value = '';
     })
 }
+
+export function isExistenceElementByDate(element, array) {
+    for (let item of array.values()) {
+        if (item.date == element) {
+            return 1;
+        }
+    }
+    return 0;
+}
+
+export function getDayObjectByDate(date, array) {
+    for (let item of array.values()) {
+        if (item.date == date) {
+            return item;
+        }
+    }
+}

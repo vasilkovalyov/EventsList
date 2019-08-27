@@ -1,9 +1,8 @@
 import { initDatepicker } from './lib/datepicker';
 
-import { EventItem } from './components/EventItem';
-import { EventDay } from './components/EventDay';
 import { DaysList } from './components/DaysList';
-import { valid } from './moduleFunctions/Validation'
+import ActionWithEvents from './components/ActionWithEvents';
+import { validation } from './moduleFunctions/Validation'
 
 
 window.onload = function () {
@@ -12,12 +11,14 @@ window.onload = function () {
 
 
 const dayListObject = new DaysList();
+const actionObject = new ActionWithEvents();
 
 const btnCreate = document.querySelector('.btn-create-event');
 const selectDate = document.querySelector('.select-date');
 
 btnCreate.addEventListener('click', (e) => {
-    valid() == 0 ? dayListObject.btnEvent() : 0;
+    actionObject.btnEvent()
+    // validation() == 0 ? actionObject.btnEvent() : 0;
 });
 
 selectDate.addEventListener('change', function (e) {

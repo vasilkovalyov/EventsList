@@ -1,12 +1,11 @@
-import { EventItem } from './EventItem';
+import EventItem from './EventItem';
 import { getInputs } from '../moduleFunctions/Functions';
 
-class EventDay {
+export default class EventDay {
     constructor(date) {
         this.date = date;
         this.eventsMap = new Map();
         this.idDay = 0;
-        this.counterEvent = 0;
     }
 
     get IdDay() {
@@ -25,21 +24,11 @@ class EventDay {
         this.date = value;
     }
 
-    get CounterEvent() {
-        return this.counterEvent;
-    }
-
-    set CounterEvent(value) {
-        this.counterEvent = value;
-    }
-
-    pushEventToDay(key, object) {
-        this.eventsMap.set(key, object);
-    }
-
-    createEventObject() {
-        const [text, date, start, end] = getInputs();
+    createAndGetEventObject = () => {
+        const [text, date, start, end] = functionsObject.getInputs();
         const object = new EventItem(text.value, date.value, start.value, end.value);
+        object.IdEvent = this.counterForIdEvents;
+        this.counterForIdEvents++;
         return object;
     }
 

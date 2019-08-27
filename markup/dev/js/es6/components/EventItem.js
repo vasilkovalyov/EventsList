@@ -1,9 +1,10 @@
-class EventItem {
+export default class EventItem {
     constructor(textEvent, dateEvent, timeStartEvent, timeEndEvent) {
         this.textEvent = textEvent;
         this.timeStartEvent = timeStartEvent;
         this.timeEndEvent = timeEndEvent;
         this.dateEvent = dateEvent;
+
         this.idEvent = 0;
     }
 
