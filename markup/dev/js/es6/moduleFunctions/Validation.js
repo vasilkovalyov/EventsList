@@ -1,26 +1,32 @@
 import { getInputs } from '../moduleFunctions/Functions'
 
-const arrayInputs = getInputs();
-
-export function valid(){
-    // const [text, date, start, end] = getInputs();
-
+export function valid() {
     getInputs().forEach((item) => {
-        if(isEmptyField(item.value)){
-            item.style.border = '1px solid #f8f8f8';
-
-        }else{
-            item.style.border = '1px solid red';
+        if (isEmptyField(item.value)) {
+            item.classList.add('input-error');
+        } else {
+            item.classList.remove('input-error');
         }
     })
 
-
+    return getInvalidCountInput(getInputs());
 }
 
-function isEmptyField(input){
-    if(input == ''){
+function getInvalidCountInput(arrayInputs) {
+    let counter = 0;
+    arrayInputs.forEach((item) => {
+        if (item.classList.contains('input-error')) {
+            counter++;
+        }
+    });
+
+    return counter;
+}
+
+function isEmptyField(input) {
+    if (input == '') {
         return 1;
-    }else{
+    } else {
         return 0;
     }
 }

@@ -1453,6 +1453,8 @@ a[href^=skype] {
   margin: 0 auto 2rem; }
   .event-form input {
     background-color: #f8f8f8; }
+    .event-form input.input-error {
+      border-color: red; }
   .event-form .input-item label {
     margin-bottom: 0; }
   .event-form .input-item:not(:last-child) {

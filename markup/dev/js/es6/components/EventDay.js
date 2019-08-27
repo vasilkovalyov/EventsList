@@ -45,7 +45,7 @@ class EventDay {
 
     render() {
         const col = document.createElement('div');
-        col.className = 'col-6';
+        col.className = 'col-4';
 
         const div = document.createElement('div');
         div.className = 'day-item';

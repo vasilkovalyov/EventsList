@@ -47,6 +47,9 @@ a[href^=skype] {
     margin: 0 auto 2rem;
     input {
         background-color: $gray-500;
+        &.input-error{
+            border-color: red;
+        }
     }
     .input-item {
         label {
