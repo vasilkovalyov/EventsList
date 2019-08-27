@@ -17,8 +17,7 @@ const btnCreate = document.querySelector('.btn-create-event');
 const selectDate = document.querySelector('.select-date');
 
 btnCreate.addEventListener('click', (e) => {
-    dayListObject.btnEvent();
-    // valid() == 0 ? dayListObject.btnEvent() : 0;
+    valid() == 0 ? dayListObject.btnEvent() : 0;
 });
 
 selectDate.addEventListener('change', function (e) {
