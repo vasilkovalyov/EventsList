@@ -35,11 +35,29 @@ class DaysList {
         }
     }
 
-    renderEventInTargetDay(targetDay, event){
+    renderEventInTargetDay(targetDay, event) {
         const eventList = targetDay.querySelector('.day-events-list');
         eventList.appendChild(event);
     }
 
+    filterDaysByDate(date) {
+        const row = document.querySelector('.events-list .row-days');
+        row.innerHTML = '';
+
+        for (let objectDay of this.daysMap.values()) {
+            if (objectDay.date == date) {
+                row.appendChild(objectDay.render());
+                const targetDay = document.querySelector('.day-item');
+                this.renderAllEventsInTargetDay(objectDay.eventsMap, targetDay);
+            }
+        }
+    }
+
+    renderAllEventsInTargetDay(arrayEvents, targetDay) {
+        for (let event of arrayEvents.values()) {
+            this.renderEventInTargetDay(targetDay, event.render());
+        }
+    }
 
     btnEvent() {
         const [text, date, start, end] = getInputs();
@@ -50,7 +68,7 @@ class DaysList {
         if (isExist) {
             const dayObject = this.getDayObjectByDate(date.value, this.daysMap); // находим в коллекции объект День по дате создания
             const eventObject = dayObject.createEventObject(); // создал объект Событие
-            
+
             eventObject.IdEvent = this.counterEvent // поставил id на объект Событие
             dayObject.eventsMap.set(eventObject.IdEvent, eventObject); // добавление События в коллекцию событий Дня
 
@@ -72,13 +90,13 @@ class DaysList {
             pushDateToSelect(document.querySelector('.select-date'), date.value);
             row.appendChild(dayObject.render());
             const daysArray = document.querySelectorAll('.day-item');
-            
+
             const targetDay = getDayItemById(dayObject.IdDay, daysArray);
             this.renderEventInTargetDay(targetDay, eventObject.render());
-            
+
             this.counterDay++;
         }
-        
+
         this.counterEvent++;
 
         const array = getInputs();
