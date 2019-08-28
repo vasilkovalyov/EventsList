@@ -1,11 +1,17 @@
-import EventItem from './EventItem';
-import { getInputs } from '../moduleFunctions/Functions';
-
-export default class EventDay {
+class EventDay {
     constructor(date) {
         this.date = date;
-        this.eventsMap = new Map();
-        this.idDay = 0;
+        this.eventsMap = new Map(); // коллекция событий в Дне
+        this.idDay = 0; // id Дня
+        this.counterDay = 0;
+    }
+
+    get CounterDay() {
+        return this.counterDay;
+    }
+
+    set CounterDay(value) {
+        this.counterDay = value;
     }
 
     get IdDay() {
@@ -22,14 +28,6 @@ export default class EventDay {
 
     set DateDay(value) {
         this.date = value;
-    }
-
-    createAndGetEventObject = () => {
-        const [text, date, start, end] = functionsObject.getInputs();
-        const object = new EventItem(text.value, date.value, start.value, end.value);
-        object.IdEvent = this.counterForIdEvents;
-        this.counterForIdEvents++;
-        return object;
     }
 
     render() {

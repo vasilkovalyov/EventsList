@@ -4,58 +4,55 @@ import { EventItem as EventObject } from './EventItem';
 import { EventDay as DayObject } from './EventDay';
 import { DaysList as DaysListObject } from './DaysList';
 
-export default class ActionWithEvents {
+class ActionWithEvents {
     constructor() {
-        this.daysListObject = new DaysListObject();
+        this.daysListObject = new DaysListObject(); // объект DaysList
         this.counterForIdDays = 0;
         this.counterForIdEvents = 0;
-
     }
 
     btnEvent() {
         const [text, date, start, end] = functionsObject.getInputs();
         const dayObject = new DayObject(date.value); // create object Day
-
-
         const row = document.querySelector('.events-list .row-days');
+        const selectDom = document.querySelector('.select-date');
 
-        if (this.isExist(dayObject.DateDay, this.daysListObject.daysMap)) { // если день существует
+        if (functionsObject.isExist(dayObject.DateDay, this.daysListObject.daysMap)) { // если день существует
             const targetDayObject = functionsObject.getDayObjectByDate(dayObject.DateDay, this.daysListObject.daysMap); // находим в коллекции день по дате и получаем его
+
             const eventObject = this.createAndGetEventObject(); // создаем и получаем объект Событие
 
-            dayObject.eventsMap.set(eventObject.IdEvent, eventObject); // добавление События в коллекцию событий Дня
+            functionsObject.addObjectToCollection(targetDayObject.eventsMap, eventObject.IdEvent, eventObject); // добавление События в коллекцию событий Дня
 
-            //отрисовка события в текущий день
-            this.renderEventToTargetDay(targetDayObject.IdDay, eventObject.render());
+            this.renderEventToTargetDay(targetDayObject.IdDay, eventObject.render()); // отрисовка события в текущий день
 
         } else { // если день не существует
             const eventObject = this.createAndGetEventObject(); // создаем и получаем объект Событие
 
-            dayObject.eventsMap.set(eventObject.IdEvent, eventObject); // добавление События в коллекцию событий Дня
+            functionsObject.addObjectToCollection(dayObject.eventsMap, eventObject.IdEvent, eventObject); // добавление События в коллекцию событий Дня
 
+            functionsObject.addObjectToCollection(this.daysListObject.daysMap, date.value, dayObject); // добавление Дня в коллекцию Дней
 
-            this.daysListObject.daysMap.set(date.value, dayObject); // добавление Дня в коллекцию Дней
             dayObject.IdDay = this.counterForIdDays; // увеличиваю id на объект День
 
-            //отрисовка дня в селект 
-            functionsObject.pushDateToSelect(document.querySelector('.select-date'), date.value);
+            functionsObject.pushDateToSelect(selectDom, date.value); // отрисовка дня в селект 
 
-            //отрисовка дня
-            row.appendChild(dayObject.render());
-            this.renderEventToTargetDay(dayObject.IdDay, eventObject.render());
+            row.appendChild(dayObject.render()); // отрисовка дня
 
-            this.counterForIdDays++;
+            this.renderEventToTargetDay(dayObject.IdDay, eventObject.render()); // отрисовка события в день
+
+            this.counterForIdDays++; // увеличение счетчика для id дней
         }
 
         // очистить все поля ввода
         const array = functionsObject.getInputs();
         functionsObject.clearAllInputField(array);
-
     }
 
     renderEventToTargetDay(id, renderEvent) { // отрисовка События
-        const targetDayFromDom = functionsObject.getDayItemById(id, document.querySelectorAll('.day-item')); // получить день по id в DOM дереве
-        const eventList = targetDayFromDom.querySelector('.day-events-list');
+        const domElements = document.querySelectorAll('.day-item');
+        const targetDayFromDom = functionsObject.getDayItemById(id, domElements); // получить день по id в DOM дереве
+        const eventList = targetDayFromDom.querySelector('.day-events-list'); // список событий в текущием дне
         eventList.appendChild(renderEvent);
     }
 
@@ -68,5 +65,24 @@ export default class ActionWithEvents {
         return object;
     }
 
-    isExist = (date, arrayMap) => functionsObject.isExistenceElementByDate(date, arrayMap); // существование объекта (Событие, Дата и т.д) в коллекции (1-существует, 0-не существует)
+    filterDaysByDate(date) {
+        const row = document.querySelector('.events-list .row-days');
+        row.innerHTML = '';
+
+        for (let objectDay of this.daysListObject.daysMap.values()) {
+            if (objectDay.date == date) {
+                row.appendChild(objectDay.render());
+                const idTargetDayDom = document.querySelector('.day-item').getAttribute('id');
+                this.renderAllEventsInTargetDay(objectDay.eventsMap, idTargetDayDom);
+            }
+        }
+    }
+
+    renderAllEventsInTargetDay(arrayEvents, targetDay) {
+        for (let event of arrayEvents.values()) {
+            this.renderEventToTargetDay(targetDay, event.render());
+        }
+    }
 }
+
+export { ActionWithEvents }

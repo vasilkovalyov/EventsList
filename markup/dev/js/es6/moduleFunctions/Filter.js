@@ -1,14 +1,6 @@
-export class Filter {
+class Filter {
     constructor() {
 
-    }
-
-    getDayObjectByDate(date, array) {
-        for (let item of array.values()) {
-            if (item.date == date) {
-                return item;
-            }
-        }
     }
 
     filterDaysByDate(date) {
@@ -30,3 +22,6 @@ export class Filter {
         }
     }
 }
+
+
+export { Filter }

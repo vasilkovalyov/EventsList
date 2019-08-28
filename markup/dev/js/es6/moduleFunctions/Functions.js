@@ -16,7 +16,7 @@ export function pushDateToSelect(select, date) {
     select.appendChild(option);
 }
 
-export function getDayItemById(id, array) {
+export const getDayItemById = (id, array) => {
     for (let i = 0; i <= array.length - 1; i++) {
         if (array[i].getAttribute('id') == id) {
             return array[i];
@@ -30,7 +30,8 @@ export function clearAllInputField(array) {
     })
 }
 
-export function isExistenceElementByDate(element, array) {
+// существование объекта (Событие, Дата и т.д) в коллекции (1-существует, 0-не существует)
+export const isExist = (element, array) => {
     for (let item of array.values()) {
         if (item.date == element) {
             return 1;
@@ -39,10 +40,14 @@ export function isExistenceElementByDate(element, array) {
     return 0;
 }
 
-export function getDayObjectByDate(date, array) {
+export const getDayObjectByDate = (date, array) => {
     for (let item of array.values()) {
         if (item.date == date) {
             return item;
         }
     }
+}
+
+export function addObjectToCollection(collection, key, object) {
+    collection.set(key, object);
 }
