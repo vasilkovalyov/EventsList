@@ -14,7 +14,14 @@ const btnCreate = document.querySelector('.btn-create-event');
 const selectDate = document.querySelector('.select-date');
 
 btnCreate.addEventListener('click', (e) => {
-    validation() == 0 ? actionObject.btnEvent() : 0; // запуск с валидацией
+    // запуск с валидацией
+    if(validation()){
+        actionObject.btnEvent();
+    }else{
+        setTimeout(() => {
+            alert('fill the all fields');
+        }, 100);
+    }
 });
 
 selectDate.addEventListener('change', function (e) {

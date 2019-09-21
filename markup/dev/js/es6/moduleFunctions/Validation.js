@@ -13,14 +13,17 @@ export function validation() {
 }
 
 function getInvalidCountInput(arrayInputs) {
-    let counter = 0;
-    arrayInputs.forEach((item) => {
-        if (item.classList.contains('input-error')) {
-            counter++;
-        }
-    });
+    // let counter = 0;
+    // arrayInputs.forEach((item) => {
+    //     if (item.classList.contains('input-error')) {
+    //         counter++;
+    //     }
+    // });
 
-    return counter;
+    // return counter;
+    return arrayInputs.filter((item) => {
+        return item.value == '';
+    }).length == 0;
 }
 
 function isEmptyField(input) {
